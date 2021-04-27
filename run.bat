@@ -1,2 +1,2 @@
 @echo off
-node node_modules\ts-node\dist\bin.js %*
+node node_modules\nodemon\bin\nodemon.js
