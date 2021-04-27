@@ -4,7 +4,10 @@
   "description": "I want to learn backend with nodejs so here is it.",
   "main": "index.js",
   "scripts": {
+    "start": "node .\\dst\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "debug": "set DEBUG=* && npm run start",
     "tsc": "node_modules\\typescript\\bin\\tsc"
   },
   "repository": {
