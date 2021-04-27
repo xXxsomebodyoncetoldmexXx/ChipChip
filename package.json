@@ -4,11 +4,9 @@
   "description": "I want to learn backend with nodejs so here is it.",
   "main": "index.js",
   "scripts": {
-    "start": "npm build && node .\\dst\\index.js",
+    "start": "node node_modules\\typescript\\bin\\tsc && node .\\dst\\index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "debug": "set DEBUG=* && npm run start",
-    "tsc": "node_modules\\typescript\\bin\\tsc"
+    "debug": "set DEBUG=app && node node_modules\\tsc-watch\\index.js --project . --outDir ./dist --onSuccess \"nodemon ./dist/index.js\""
   },
   "repository": {
     "type": "git",
