@@ -4,18 +4,26 @@ import cors from 'cors';
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import debug from 'debug';
+import sqlite3 from 'sqlite3';
+import { CommonRoutes } from './common/commonRoutes';
+import { HomeRoute } from './routes/home';
 
+// Enviroment variable
 dotenv.config();
 
 const app: Application = express();
-const port: number = Number(process.env.PORT) || 8000;
-const debugLog: debug.IDebugger = debug('app');
+const PORT: number = Number(process.env.PORT) || 8000;
+const debugLog: debug.IDebugger = debug('app:index');
+const routes: Array<CommonRoutes> = [];
 
+// 3rd middleware
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello world');
-});
+// routes list
+routes.push(new HomeRoute(app, '/'));
 
-app.listen(port);
+// start server
+app.listen(PORT, () =>
+  debugLog(`Server is running at http://localhost:${PORT}`)
+);
