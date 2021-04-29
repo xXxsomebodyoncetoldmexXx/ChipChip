@@ -4,9 +4,12 @@ import cors from 'cors';
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import debug from 'debug';
-import sqlite3 from 'sqlite3';
 import { CommonRoutes } from './common/commonRoutes';
-import { HomeRoute } from './routes/home';
+import HomeRoute from './routes/home';
+import ChipRoute from './routes/chips';
+import { Database } from 'sqlite3';
+// import initDatabase from './db/dbDAO';
+import { nanoid } from 'nanoid';
 
 // Enviroment variable
 dotenv.config();
@@ -18,10 +21,16 @@ const routes: Array<CommonRoutes> = [];
 
 // 3rd middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // routes list
 routes.push(new HomeRoute(app, '/'));
+routes.push(new ChipRoute(app, '/api/chips'));
+
+// Database
+// const db: Database = initDatabase('db.sqlite');
+// db.run(`insert into users(id, name) values ('${nanoid(48)}', 'steve')`);
 
 // start server
 app.listen(PORT, () =>

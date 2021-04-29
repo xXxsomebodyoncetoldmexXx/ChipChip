@@ -5,10 +5,10 @@ export abstract class CommonRoutes {
   name: string;
   path: string;
 
-  constructor(name: string, uri: string) {
+  constructor(name: string, path: string) {
     this.route = express.Router();
     this.name = name;
-    this.path = uri;
+    this.path = path;
   }
 
   getName(): string {
@@ -19,5 +19,5 @@ export abstract class CommonRoutes {
     return this.path;
   }
 
-  abstract configureRoute(): void;
+  abstract configureRoute(): Router;
 }
