@@ -1,13 +1,14 @@
 import { Database } from 'sqlite3';
 import CommonTable from '../common/commonTable';
+import Comment from './properties/comment';
 
-export default class CommentsTable extends CommonTable {
+export default class CommentsTable extends CommonTable<Comment> {
   constructor(db: Database) {
     super(db, 'comments', 'app:db:comments');
   }
 
-  initTable(db: Database) {
-    db.run(
+  initTable() {
+    this.db.run(
       `CREATE TABLE IF NOT EXISTS ${this.tableName} (
         id        VARCHAR(72) PRIMARY KEY NOT NULL,
         authorID  VARCHAR(48) NOT NULL,
@@ -19,7 +20,13 @@ export default class CommentsTable extends CommonTable {
         REFERENCES users (id) 
         ON UPDATE CASCADE
         ON DELETE CASCADE)`,
-      () => this.debugLog(`Success run table ${this.tableName}`)
+      (err) => {
+        if (err) {
+          this.debugLog(err);
+        } else {
+          this.debugLog(`Success run table ${this.tableName}`);
+        }
+      }
     );
   }
 }

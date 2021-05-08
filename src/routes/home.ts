@@ -1,4 +1,4 @@
-import { CommonRoutes } from '../common/commonRoutes';
+import { CommonRoutes } from './commonRoutes';
 import { Application, Request, Response, Router } from 'express';
 
 export default class HomeRoute extends CommonRoutes {

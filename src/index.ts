@@ -4,11 +4,11 @@ import cors from 'cors';
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 import debug from 'debug';
-import { CommonRoutes } from './common/commonRoutes';
+import { CommonRoutes } from './routes/commonRoutes';
 import HomeRoute from './routes/home';
 import ChipRoute from './routes/chips';
 import { Database } from 'sqlite3';
-// import initDatabase from './db/dbDAO';
+import initDatabase from './db/dbDAO';
 import { nanoid } from 'nanoid';
 
 // Enviroment variable
@@ -29,7 +29,7 @@ routes.push(new HomeRoute(app, '/'));
 routes.push(new ChipRoute(app, '/api/chips'));
 
 // Database
-// const db: Database = initDatabase('db.sqlite');
+const db: Database = initDatabase('db.sqlite');
 // db.run(`insert into users(id, name) values ('${nanoid(48)}', 'steve')`);
 
 // start server
